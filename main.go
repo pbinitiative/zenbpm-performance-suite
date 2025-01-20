@@ -25,12 +25,12 @@ func justCompleteNothingHandler(job bpmn_engine.ActivatedJob) {
 }
 
 func main() {
+	workflow := "random-tree-workflow.bpmn"
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-
 	bpmnEngine := bpmn_engine.New()
-	process, err := bpmnEngine.LoadFromFile("random-tree-workflow.bpmn")
+	process, err := bpmnEngine.LoadFromFile(workflow)
 	if err != nil {
-		panic("file \"random-tree-workflow.bpmn\" can't be read.")
+		panic("file '" + workflow + "' can't be read.")
 	}
 
 	bpmnEngine.NewTaskHandler().Type("task").Handler(justCompleteNothingHandler)
@@ -46,5 +46,7 @@ func main() {
 		avgExecTime += results[i]
 	}
 	avgExecTime = avgExecTime / int64(noOfRuns)
-	println(fmt.Sprintf("Average execution of %d runs is %d ms", noOfRuns, avgExecTime))
+	println(fmt.Sprintf("Workflow: '%s'\n"+
+		"Executing %d times\n"+
+		"Average time spent is %d ms", workflow, noOfRuns, avgExecTime))
 }
