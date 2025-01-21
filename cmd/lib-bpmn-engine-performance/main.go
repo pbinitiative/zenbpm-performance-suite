@@ -48,5 +48,5 @@ func main() {
 	avgExecTime = avgExecTime / int64(noOfRuns)
 	println(fmt.Sprintf("Workflow: '%s'\n"+
 		"Executing %d times\n"+
-		"Average time spent is %d ms", workflow, noOfRuns, avgExecTime))
+		"Average time spent per execution is %d ms", workflow, noOfRuns, avgExecTime))
 }
